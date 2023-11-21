@@ -1,6 +1,12 @@
 C = gcc-13
 CFLAGS = -Wall -Wextra -std=c99
 
+floatTest: float_rndm.o test_float_rndm.c
+	$(C) $(CFLAGS) -o $@ $^
+
+iomTest: iom361_r2.o float_rndm.o test_iom361_r2.c
+	$(C) $(CFLAGS) -o $@ $^
+
 iom361_r2.o: iom361_r2.c iom361_r2.h float_rndm.h
 	$(C) $(CFLAGS) -c $^
 
