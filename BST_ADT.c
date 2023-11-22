@@ -8,6 +8,7 @@
  *
  ****/
 
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -34,7 +35,7 @@ typedef struct dataTreeNode{
 BST_TreeNode *root = NULL;
 
 // Insert a new node into tree
-BST_TreeNode* createNewNode(Data* data_in){
+void insertBST(Data* data_in){
 
 	// declare node and references
 	BST_TreeNode *tempNode = malloc(sizeof(BST_TreeNode));
@@ -65,15 +66,49 @@ BST_TreeNode* createNewNode(Data* data_in){
 			current = current->left;
 			// insert into left
 			if (current == NULL){
-				
+				parent->right = tempNode;
+				return;
 			}
-
 		}
 
 
+		// if not in left, go right
+		else {
+			current = current->right;
 
-
-		
+			// insert into right
+			if ( current == NULL){
+				parent->right = tempNode;
+				return;
+			}
+		}
+	}		
 }
 
 
+// Traverse the Tree, pre order (root, left, right)
+void preOrder(BST_TreeNode *root){
+	if (root == NULL){
+
+		printf("No root node found.\n");
+		return;
+	}
+	printf("%ld ", root->data->timestamp);
+	preOrder(root->left);
+	preOrder(root->right);
+}
+
+// Traverse the Tree, post order (left, right, root)
+void postOrder(BST_TreeNode *root){
+	if (root == NULL){
+
+		printf("No root node found.\n");
+		return;
+	}
+
+	postOrder(root->left);
+	postOrder(root->right);
+	printf("%ld ", root->data->timestamp);
+
+	
+}
