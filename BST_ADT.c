@@ -39,7 +39,12 @@ void insertBST(Data* data_in){
 
 	// declare node and references
 	BST_TreeNode *tempNode = malloc(sizeof(BST_TreeNode));
-	// TODO: check for MALLOC success or exit
+	
+	if (tempNode == NULL) {
+		printf("Node creation failure. Terminating request\n");
+		return;
+	}
+
 	BST_TreeNode *current;
 	BST_TreeNode *parent;
 
@@ -85,6 +90,32 @@ void insertBST(Data* data_in){
 	}		
 }
 
+// Search the tree for a timestamp
+BST_TreeNode* search (Data data_in){
+
+	BST_TreeNode *current = root;
+
+	while( current->data->timestamp != data_in.timestamp ) {
+		if (current != NULL)
+			printf("%ld ", current->data->timestamp);
+
+		// move to left node
+		if (current->data->timestamp > data_in.timestamp){
+			current = current->left;
+		}
+
+		// move to right node
+		else {
+			current = current->right;
+		}
+
+		if (current == NULL){
+			return NULL;
+		}
+	}
+	return current;
+
+} 
 
 // Traverse the Tree, pre order (root, left, right)
 void preOrder(BST_TreeNode *root){
