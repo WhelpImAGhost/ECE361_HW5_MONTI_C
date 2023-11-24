@@ -16,22 +16,23 @@
 #include <time.h>
 #include "BST_ADT.h"
 
-// Struct for IOM_361 module data containment
-typedef struct dataset{
+/* 
+ * Struct for IOM_361 module data containment
+ * typedef struct dataset{
 
 	time_t timestamp;
 	uint32_t temp;
 	uint32_t humid;
 } Data;
 
-// Struct to contain Binary Tree
-typedef struct dataTreeNode{
+ * typedef struct dataTreeNode{
 	Data* data;
 	struct dataTreeNode *left;
 	struct dataTreeNode *right;
 	
 } BST_TreeNode;
 
+*/
 BST_TreeNode *root = NULL;
 
 // Insert a new node into tree
@@ -91,16 +92,16 @@ void insertBST(Data* data_in){
 }
 
 // Search the tree for a timestamp
-BST_TreeNode* search (Data data_in){
+BST_TreeNode* search (long data_in){
 
 	BST_TreeNode *current = root;
 
-	while( current->data->timestamp != data_in.timestamp ) {
+	while( current->data->timestamp != data_in ) {
 		if (current != NULL)
 			printf("%ld ", current->data->timestamp);
 
 		// move to left node
-		if (current->data->timestamp > data_in.timestamp){
+		if (current->data->timestamp > data_in){
 			current = current->left;
 		}
 
@@ -118,10 +119,9 @@ BST_TreeNode* search (Data data_in){
 } 
 
 // Traverse the Tree, pre order (root, left, right)
-void preOrder(BST_TreeNode *root){
+void preOrder(BST_TreeNode* root){
 	if (root == NULL){
 
-		printf("No root node found.\n");
 		return;
 	}
 	printf("%ld ", root->data->timestamp);
@@ -143,3 +143,4 @@ void postOrder(BST_TreeNode *root){
 
 	
 }
+
